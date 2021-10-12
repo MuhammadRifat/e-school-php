@@ -34,7 +34,7 @@ include_once "../components/header.php";
                     <td>' . $row['teacher_name'] . '</td>
                     <td>' . $row['price'] . '</td>
                     <td>
-                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php" class="btn btn-success"><i class="fas fa-edit"></i><small> Edit</small></a>
+                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/edit-course.php?id=' . $row['id'] . '" class="btn btn-success"><i class="fas fa-edit"></i><small> Edit</small></a>
                     <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php?id=' . $row['id'] . '&delete=true" class="btn btn-danger"><i class="fas fa-trash"></i><small> Delete</small></a>
                     </td>
                 </tr>';
