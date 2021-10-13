@@ -34,8 +34,9 @@ include_once "../components/header.php";
                     <td>' . $row['teacher_name'] . '</td>
                     <td>' . $row['price'] . '</td>
                     <td>
-                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/edit-course.php?id=' . $row['id'] . '" class="btn btn-success"><i class="fas fa-edit"></i><small> Edit</small></a>
-                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php?id=' . $row['id'] . '&delete=true" class="btn btn-danger"><i class="fas fa-trash"></i><small> Delete</small></a>
+                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-class.php?courseId=' . $row['id'] . '" class="btn btn-primary btn-sm"><i class="fas fa-tasks"></i> Manage Class</a>
+                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/edit-course.php?id=' . $row['id'] . '" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php?id=' . $row['id'] . '&delete=true" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                     </td>
                 </tr>';
                 }
@@ -52,6 +53,7 @@ if (isset($_GET['delete'])) {
     deleteCourses($courseId, $conn);
 }
 
+// for deleting course
 function deleteCourses($id, $conn)
 {
     $sql_deleteCourse = "delete from courses where id = $id";

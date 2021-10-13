@@ -107,7 +107,7 @@ include_once "../components/header.php";
                 <!-- details -->
                 <div class="d-flex justify-content-center pt-2 border rounded m-3">
                     <ul type="square">
-                        <li>36 ' . $row["total_videos"] . '</li>
+                        <li>' . $row["total_videos"] . ' videos</li>
                         <li>' . $row["total_quizz"] . ' quizz</li>
                         <li>' . $row["total_notes"] . ' notes</li>
                         <li>' . $row["total_practices"] . ' practices</li>
@@ -116,7 +116,7 @@ include_once "../components/header.php";
                 </div>
                 <div class="mt-3 mx-5">
                     <h4 class="text-end">&#2547; ' . $row["price"] . '</h4>
-                    <button class="btn btn-success w-100 fs-5">Start Course <i class="fas fa-arrow-right"></i></button>
+                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/start-class/?courseId=' . $id . '" class="btn btn-success w-100 fs-5">Start Course <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
