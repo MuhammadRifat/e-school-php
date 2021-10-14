@@ -15,6 +15,18 @@ include_once "./components/header.php";
         </div>
     </div>
 
+    <!-- Crash Courses -->
+    <h3 class="text-center border-bottom mt-4">Crash Courses</h3>
+    <div class="row justify-content-center">
+        <?php
+        // load all courses from database 
+        loadCourses('Crash Course', $conn);
+        ?>
+    </div>
+    <div class="text-center mt-2">
+        <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/course/?category=Crash%20Course" class="btn btn-outline-secondary text-white btn-sm">See more <i class="fas fa-arrow-right"></i></a>
+    </div>
+
     <!-- Skill Development Courses -->
     <h3 class="text-center border-bottom mt-4">Skill Development Courses</h3>
     <div class="row justify-content-center">
@@ -22,6 +34,9 @@ include_once "./components/header.php";
         // load all courses from database 
         loadCourses('Skill Development', $conn);
         ?>
+    </div>
+    <div class="text-center mt-2">
+        <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/course/?category=Skill%20Development" class="btn btn-outline-secondary text-white btn-sm">See more <i class="fas fa-arrow-right"></i></a>
     </div>
 
     <!-- Job Preparation Courses -->
@@ -32,18 +47,12 @@ include_once "./components/header.php";
         loadCourses('Job Preparation', $conn);
         ?>
     </div>
-
-    <!-- Crash Courses -->
-    <h3 class="text-center border-bottom mt-4">Crash Courses</h3>
-    <div class="row justify-content-center">
-        <?php
-        // load all courses from database 
-        loadCourses('Crash Course', $conn);
-        ?>
+    <div class="text-center mt-2">
+        <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/course/?category=Job%20Preparation" class="btn btn-outline-secondary text-white btn-sm">See more <i class="fas fa-arrow-right"></i></a>
     </div>
 
     <!-- summary -->
-    <div class="row mt-4">
+    <div class="row mt-5">
         <div class="col-sm-6 col-md-4 col-lg-3 p-2">
             <div class="d-flex bgc-primary rounded align-items-center justify-content-center p-3">
                 <i class="fas fa-play-circle fs-1 me-3"></i>
@@ -83,19 +92,25 @@ include_once "./components/header.php";
             </div>
         </div>
     </div>
+
+    <!-- last poster -->
+    <div class="mt-5">
+        <img src="./images/virtual-learning-illustration.jpg" alt="" class="rounded w-100 h-75">
+    </div>
 </section>
 
 <?php
 include_once "./components/footer.php";
 
-function loadCourses($category, $conn) {
-    $sql_courses = "SELECT id, course_name, image_url, time_required, price FROM courses where category = '$category' order by date DESC;";
+function loadCourses($category, $conn)
+{
+    $sql_courses = "SELECT id, course_name, image_url, time_required, price FROM courses where category = '$category' order by date DESC LIMIT 4;";
 
-        $result = mysqli_query($conn, $sql_courses);
+    $result = mysqli_query($conn, $sql_courses);
 
-        if (mysqli_num_rows($result)) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<div class="col-sm-6 col-md-4 col-lg-3 mt-3">
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="col-sm-6 col-md-4 col-lg-3 mt-3">
                 <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/components/course-details.php?id=' . $row["id"] . '">
                     <div class="card bgc-primary text-light shadow">
                         <img src="./images/uploads/' . $row["image_url"] . '" class="card-img-top" height="160px" alt="' . $row["course_name"] . '">
@@ -109,9 +124,9 @@ function loadCourses($category, $conn) {
                     </div>
                 </a>
             </div>';
-            }
-        } else {
-            echo '<p class="text-center">No course found!</p>';
         }
+    } else {
+        echo '<p class="text-center">No course found!</p>';
+    }
 }
 ?>

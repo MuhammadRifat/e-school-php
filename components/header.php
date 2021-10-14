@@ -1,3 +1,8 @@
+<?php
+//start session on web page
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +42,10 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark variant bgc-primary">
         <div class="container">
-            <a class="navbar-brand" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/">E-School</a>
+            <a class="navbar-brand" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/">
+                <img src="../components/default-monochrome.svg" alt="" class="" width="180">
+                <img src="./components/default-monochrome.svg" alt="" class="" width="180">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,7 +69,9 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Username
+                            <?php
+                                echo $_SESSION['user_first_name'];
+                            ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/"><i class="fas fa-table"></i> Dashboard</a></li>
@@ -86,4 +96,5 @@
     if (!$conn) {
         die("Connection Failed: " . mysqli_connect_error());
     }
+
     ?>
