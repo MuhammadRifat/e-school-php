@@ -1,6 +1,20 @@
 <?php
 //start session on web page
 session_start();
+
+$user_first_name = '';
+$user_email = '';
+if (isset($_SESSION['user_email_address'])) {
+    $user_email = $_SESSION['user_email_address'];
+    $user_first_name = $_SESSION['user_first_name'];
+}
+
+$admin_email = '';
+$admin_name = '';
+if (isset($_SESSION['admin_email'])) {
+    $admin_email = $_SESSION['admin_email'];
+    $admin_name = $_SESSION['admin_name'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,19 +81,35 @@ session_start();
                 </ul>
 
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?php
-                                echo $_SESSION['user_first_name'];
-                            ?>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/"><i class="fas fa-table"></i> Dashboard</a></li>
-                            <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/add-course.php"><i class="fas fa-plus-square"></i> Add Course</a></li>
-                            <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php"><i class="fas fa-tasks"></i> Manage Course</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                        </ul>
-                    </li>
+
+                    <?php
+                    if (!$user_email && !$admin_email) {
+                        echo '<a class="btn btn-outline-light btn-sm" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/login">Login</a>';
+                    } else if ($user_email && !$admin_email) {
+                        // Student Dashboard
+                        echo '<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . $user_first_name . '</a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/student/"><i class="fas fa-table"></i> Dashboard</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/login/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                            </ul>
+                        </li>';
+                    } else if ($admin_email && !$user_email) {
+
+                        // Admin Dashboard
+                        echo '<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . $admin_name . '</a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/"><i class="fas fa-table"></i> Dashboard</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/add-course.php"><i class="fas fa-plus-square"></i> Add Course</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php"><i class="fas fa-tasks"></i> Manage Course</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php"><i class="fas fa-tasks"></i> Manage Students</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                            </ul>
+                        </li>';
+                    }
+                    ?>
+
                 </ul>
             </div>
         </div>

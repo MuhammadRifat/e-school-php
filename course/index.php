@@ -21,13 +21,15 @@ if ($category === 'Academic') {
         if ($category === 'Academic') {
             $sql_courses = "SELECT id, course_name, image_url, time_required, price FROM courses where category = '$category' and class = '$class' order by date DESC;";
         } else {
-            $sql_courses = "SELECT id, course_name, image_url, time_required, price FROM courses where category = '$category' order by date DESC;";
+            $sql_courses = "SELECT id, course_name, image_url, time_required, price FROM courses WHERE id NOT IN (SELECT courseId FROM enrolls WHERE userEmail='$user_email') AND category='$category' ORDER BY date DESC;";
         }
 
         $result = mysqli_query($conn, $sql_courses);
 
         if (mysqli_num_rows($result)) {
             while ($row = mysqli_fetch_assoc($result)) {
+                $price = ($row["price"] == 0) ? 'Free' : '&#2547; ' . $row["price"];
+
                 echo '<div class="col-sm-6 col-md-4 col-lg-3 mt-3">
                 <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/components/course-details.php?id=' . $row["id"] . '">
                     <div class="card bgc-primary text-light shadow">
@@ -36,7 +38,7 @@ if ($category === 'Academic') {
                             <h5 class="card-title">' . $row["course_name"] . '</h5>
                         </div>
                         <div class="px-3 d-flex justify-content-between">
-                            <h5 class="rounded py-1 px-2 bg-success">&#2547; ' . $row["price"] . '</h5>
+                            <h5 class="rounded py-1 px-2 bg-success">' . $price . '</h5>
                             <h6 class="rounded p-1 bg-danger">' . $row["time_required"] . ' hour</h6>
                         </div>
                     </div>

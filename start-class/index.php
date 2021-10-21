@@ -1,5 +1,9 @@
 <?php
 include_once "../components/header.php";
+// check user login or not
+if(!$_SESSION['user_first_name']) {
+    echo "<script>location.href='http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/login';</script>";
+}
 
 $courseId = $_REQUEST['courseId'];
 $classId = '';

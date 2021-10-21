@@ -14,6 +14,12 @@ include_once "../components/header.php";
         if (mysqli_num_rows($result)) {
             $row = mysqli_fetch_assoc($result);
 
+            if ($row['price'] > 0) {
+                $url = "http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/payment/?courseId=$id";
+            } else {
+                $url = "http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/start-class/?courseId=$id";
+            }
+
             echo '<div class="col-md-6 p-2">
             <!-- Course title and description -->
             <div>
@@ -116,7 +122,7 @@ include_once "../components/header.php";
                 </div>
                 <div class="mt-3 mx-5">
                     <h4 class="text-end">&#2547; ' . $row["price"] . '</h4>
-                    <a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/start-class/?courseId=' . $id . '" class="btn btn-success w-100 fs-5">Start Course <i class="fas fa-arrow-right"></i></a>
+                    <a href="' . $url . '" class="btn btn-success w-100 fs-5">Start Course <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>

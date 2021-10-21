@@ -1,10 +1,17 @@
 <?php
 include_once "../components/header.php";
+
+if (!$admin_email) {
+    echo "<script>location.href='http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/login.php';</script>";
+}
+
 $course_id = '';
 if (isset($_REQUEST['courseId'])) {
     $course_id = $_REQUEST['courseId'];
 }
 ?>
+
+<?php if ($admin_email) { ?>
 
 <section class="container mt-8 text-light">
     <h3 class="text-center border-bottom">Upload Class</h3>
@@ -67,6 +74,7 @@ if (isset($_REQUEST['courseId'])) {
 </section>
 
 <?php
+} // end condition 
 // upload course
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $courseId = $_POST['courseId'];

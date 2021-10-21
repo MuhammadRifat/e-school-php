@@ -22,6 +22,16 @@ if (isset($_GET["code"])) {
 
         //Get user profile data from google
         $data = $google_service->userinfo->get();
+        
+        $firstName = $data['given_name']; 
+        $lastName = $data['family_name'];
+        $email = $data['email'];
+        $imageUrl = $data['picture'];
+
+        $sql_insertUser = "INSERT into users (email, firstName, lastName, imageUrl) values('$email', '$firstName', '$lastName', '$imageUrl');";
+        if(mysqli_query($conn, $sql_insertUser)) {
+            echo '';
+        }
 
         //Below you can find Get profile data and store into $_SESSION variable
         if (!empty($data['given_name'])) {
@@ -49,28 +59,27 @@ if (isset($_GET["code"])) {
 //This is for check user has login into system by using Google account, if User not login into system then it will execute if block of code and make code for display Login link for Login using Google account.
 if (!isset($_SESSION['access_token'])) {
     //Create a URL to obtain user authorization
-    $login_button = '<a href="' . $google_client->createAuthUrl() . '">Continue with google</a>';
+    $login_button = '<a class="btn btn-primary" href="' . $google_client->createAuthUrl() . '"><i class="fab fa-google"></i> Continue with google</a>';
 }
+
+
 
 ?>
 
 <div class="container mt-8 text-light">
-    <br />
-    <h2 align="center">PHP Login using Google Account</h2>
-    <br />
-    <div class="panel panel-default">
-        <?php
-        if ($login_button == '') {
-            echo '<div class="panel-heading">Welcome User</div><div class="panel-body">';
-            echo '<img src="' . $_SESSION["user_image"] . '" class="img-responsive img-circle img-thumbnail" />';
-            echo '<h3><b>Name :</b> ' . $_SESSION['user_first_name'] . ' ' . $_SESSION['user_last_name'] . '</h3>';
-            echo '<h3><b>Email :</b> ' . $_SESSION['user_email_address'] . '</h3>';
-            echo '<h3><a href="logout.php">Logout</h3></div>';
-        } else {
-            echo '<div align="center">' . $login_button . '</div>';
-        }
-        
-        ?>
+    <div class="row justify-content-center">
+        <div class="col-6  mt-4 border rounded bgc-primary p-4">
+            <h2 class="text-center mb-4">Login using Google Account</h2>
+            <?php
+            if ($login_button == '') {
+                header("Location: ../index.php");
+            } else {
+                echo '<div align="center">' . $login_button . '</div>';
+            }
+
+            ?>
+
+        </div>
     </div>
 </div>
 </body>

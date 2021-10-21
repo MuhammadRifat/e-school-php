@@ -1,6 +1,12 @@
 <?php
 include_once "../components/header.php";
+
+if (!$admin_email) {
+    echo "<script>location.href='http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/login.php';</script>";
+}
 ?>
+
+<?php if ($admin_email) { ?>
 
 <section class="container mt-8 text-light">
     <h3 class="text-center border-bottom">Manage Course</h3>
@@ -48,6 +54,8 @@ include_once "../components/header.php";
 </section>
 
 <?php
+}
+
 if (isset($_GET['delete'])) {
     $courseId = $_GET['id'];
     deleteCourses($courseId, $conn);

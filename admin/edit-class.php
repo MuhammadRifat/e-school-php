@@ -1,11 +1,18 @@
 <?php
 include_once "../components/header.php";
+
+if (!$admin_email) {
+    echo "<script>location.href='http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/login.php';</script>";
+}
+
 $classId = $_REQUEST['classId'];
 
 $sql_class = "SELECT title, class_url from classes where id = $classId";
 $result = mysqli_query($conn, $sql_class);
 $row = mysqli_fetch_assoc($result);
 ?>
+
+<?php if ($admin_email) { ?>
 
 <section class="container mt-8 text-light">
     <h3 class="text-center border-bottom">Edit Class</h3>
@@ -33,6 +40,8 @@ $row = mysqli_fetch_assoc($result);
 </section>
 
 <?php
+} // End of condition
+
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $classId = $_POST['classId'];
         $title = $_POST['title'];
