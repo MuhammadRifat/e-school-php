@@ -18,6 +18,14 @@ $resultUrl = mysqli_query($conn, $sql_getClassUrl);
 $row_classUrl = mysqli_fetch_array($resultUrl);
 $classUrl = str_ireplace("watch?v=","embed/",$row_classUrl[0]);
 $title = $row_classUrl[1]; 
+
+// Check User payment approved or not by admin
+$sql_check = "SELECT status FROM enrolls where courseId=$courseId and userEmail='$user_email'";
+$result_check = mysqli_query($conn, $sql_check);
+$row_enrolls = mysqli_fetch_array($result_check);
+
+if($row_enrolls['status'] === 'Approved') {
+
 ?>
 
 <section class="container mt-8 text-light">
@@ -37,7 +45,7 @@ $title = $row_classUrl[1];
                 $result = mysqli_query($conn, $sql_getClass);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/start-class/?courseId=' . $courseId . '&classId=' . $row['id'] . '" class="btn btn-outline-secondary text-white mt-1 border-none w-100">' . $row['title'] . '</a>';
+                        echo '<a href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/start-class/?courseId=' . $courseId . '&classId=' . $row['id'] . '" class="btn btn-outline-secondary text-white mt-1 border-none w-100 text-start">' . $row['title'] . '</a>';
                     }
                 }
                 ?>
@@ -45,3 +53,9 @@ $title = $row_classUrl[1];
         </div>
     </div>
 </section>
+
+<?php
+} else {
+    echo '<h5 class="mt-8 text-danger text-center">Please wait for admin Approve.</h5>';
+}
+?>
