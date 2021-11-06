@@ -80,7 +80,7 @@ if (isset($_SESSION['admin_email'])) {
                     </li>
                 </ul>
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav text-center">
 
                     <?php
                     if (!$user_email && !$admin_email) {

@@ -8,9 +8,9 @@ if (!$_SESSION['user_email_address']) {
 
 <section class="container mt-8 text-light">
     <h3 class="text-center border-bottom">Enrolled Courses</h3>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-3">
         <?php
-        $sql_courses = "SELECT courses.id, courses.course_name, courses.image_url FROM courses, enrolls WHERE courses.id=enrolls.courseId and enrolls.userEmail = '$user_email';";
+        $sql_courses = "SELECT courses.id, courses.course_name, courses.image_url FROM courses, enrolls WHERE courses.id=enrolls.courseId and enrolls.userEmail = '$user_email' order by enrolls.date desc;";
         $result = mysqli_query($conn, $sql_courses);
 
         if (mysqli_num_rows($result) > 0) {

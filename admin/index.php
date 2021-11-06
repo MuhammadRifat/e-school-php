@@ -13,21 +13,48 @@ if (!$admin_email) {
 
         <!-- summary -->
         <div class="row">
-            <?php loadComponents('Pending Payment', '45 Requests', 'fas fa-plus', 'manage-course'); ?>
-            <?php loadComponents('Approved Payment', '56 Users', 'fas fa-users', 'manage-course'); ?>
-            <?php loadComponents('Manage Courses', '4500+ Courses', 'fas fa-tasks', 'manage-course'); ?>
-            <?php loadComponents('Add Course', '4500+ Courses', 'fas fa-plus-square', 'add-course'); ?>
-            <?php loadComponents('Manage Students', '4500+ Students', 'fas fa-tasks', 'add-course'); ?>
+            <?php 
+            loadComponents('Pending Payment', getTotalRequest($conn, 'enrolls', 'Pending'). ' Requests', 'fas fa-plus', 'pending-payment', ''); 
+            loadComponents('Approved Payment', getTotalRequest($conn, 'enrolls', 'Approved'). ' Students', 'fas fa-users', 'approved-payment', '');
+            loadComponents('Manage Courses', getTotalRequest($conn, 'courses', ''). ' Courses', 'fas fa-tasks', 'manage-course', '');
+            loadComponents('Add Course', getTotalRequest($conn,  'courses', ''). ' Courses', 'fas fa-plus-square', 'add-course', '');
+            ?>
+        </div>
+
+        <!-- Enrolled students -->
+        <h3 class="mt-3">Enrolled Students</h3>
+        <div class="row">
+            <?php
+                $sql_totalEnroll = "SELECT courseId, courses.course_name, COUNT(enrolls.id) FROM enrolls, courses WHERE enrolls.courseId=courses.id AND enrolls.status='Approved' GROUP by courseId";
+                $result_enrolls = mysqli_query($conn, $sql_totalEnroll); 
+                
+                if(mysqli_num_rows($result_enrolls)) {
+                    while($row = mysqli_fetch_assoc($result_enrolls)){
+                        loadComponents($row['course_name'], $row['COUNT(enrolls.id)'] . " Students", 'fas fa-book-open', 'manage-students', '?courseId='.$row['courseId']);
+                    }
+                }
+            ?>
         </div>
     </section>
 
 <?php
 }
 
-function loadComponents($name, $details, $icon, $fileName)
+function getTotalRequest($conn, $tableName, $status) {
+    $sql_request = "SELECT COUNT(id) FROM $tableName";
+    if($status != '') {
+        $sql_request = "SELECT COUNT(id) FROM $tableName WHERE status='$status'";
+    }
+    $result_request = mysqli_query($conn, $sql_request);
+    $row = mysqli_fetch_assoc($result_request);
+    return $row['COUNT(id)'];
+}
+
+function loadComponents($name, $details, $icon, $fileName, $route)
 {
+    $file = $fileName. ".php" . $route;
     echo '<div class="col-md-6 col-lg-4 p-2">
-    <a class="text-light" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/'.$fileName.'.php">
+    <a class="text-light" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/'.$file.'">
     <div class="d-flex bgc-primary rounded align-items-center justify-content-center p-3">
         <i class="'.$icon.' fs-1 me-3"></i>
         <div>

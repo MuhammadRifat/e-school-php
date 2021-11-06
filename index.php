@@ -11,7 +11,7 @@ include_once "./components/header.php";
             <p>Class 1-12, admission test, special course for university and working life, 24/7 directions including model test. Select your section, start your journey.</p>
         </div>
         <div class="col-md-6">
-            <img src="./images/animation-software-header.gif" alt="" width="100%" class="img-responsive rounded">
+            <img src="./images/animation-software-header.gif" alt="" class="w-100 img-responsive rounded">
         </div>
     </div>
 

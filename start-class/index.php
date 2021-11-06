@@ -17,7 +17,7 @@ if(isset($_REQUEST['classId'])) {
 $resultUrl = mysqli_query($conn, $sql_getClassUrl);
 $row_classUrl = mysqli_fetch_array($resultUrl);
 $classUrl = str_ireplace("watch?v=","embed/",$row_classUrl[0]);
-$title = $row_classUrl[1];
+$title = $row_classUrl[1]; 
 ?>
 
 <section class="container mt-8 text-light">
