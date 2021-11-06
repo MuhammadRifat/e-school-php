@@ -25,7 +25,7 @@ $courseId = $_GET['courseId'];
         <tbody>
 
             <?php
-            $sql_students = "SELECT enrolls.id, firstName, lastName, email, mobile FROM users, enrolls where users.email=enrolls.userEmail AND enrolls.courseId=$courseId";
+            $sql_students = "SELECT enrolls.id, firstName, lastName, email, mobile FROM users, enrolls where users.email=enrolls.userEmail AND enrolls.courseId=$courseId AND enrolls.status='Approved'";
             $result = mysqli_query($conn, $sql_students);
 
             if (mysqli_num_rows($result) > 0) {

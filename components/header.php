@@ -84,7 +84,7 @@ if (isset($_SESSION['admin_email'])) {
 
                     <?php
                     if (!$user_email && !$admin_email) {
-                        echo '<a class="btn btn-outline-light btn-sm" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/login">Login</a>';
+                        echo '<a class="btn btn-outline-light btn-sm" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/login"><i class="fas fa-sign-in-alt"></i> Login</a>';
                     } else if ($user_email && !$admin_email) {
                         // Student Dashboard
                         echo '<li class="nav-item dropdown">
@@ -103,7 +103,6 @@ if (isset($_SESSION['admin_email'])) {
                                 <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/"><i class="fas fa-table"></i> Dashboard</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/add-course.php"><i class="fas fa-plus-square"></i> Add Course</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php"><i class="fas fa-tasks"></i> Manage Course</a></li>
-                                <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/manage-course.php"><i class="fas fa-tasks"></i> Manage Students</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/3rd%20year%20project/Online%20Admission%20and%20Learning%20System/admin/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                             </ul>
                         </li>';

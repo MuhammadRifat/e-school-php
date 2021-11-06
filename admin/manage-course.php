@@ -73,4 +73,5 @@ function deleteCourses($id, $conn)
         echo '<h2 class="text-white">Failed</h2>';
     }
 }
+
 ?>

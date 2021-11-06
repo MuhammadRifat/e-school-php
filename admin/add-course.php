@@ -135,6 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql_insertCourse = "INSERT INTO `courses` (`course_name`, `category`, `class`, `image_url`,`description`, `teacher_name`, `teacher_details`, `about_course`, `time_required`, `total_videos`, `total_quizz`, `total_notes`, `total_practices`, `duration_months`, `price`) VALUES('$courseName', '$category', '$class', '$imageUrl','$courseDescription', '$teacherName', '$teacherDetails', '$aboutCourse', '$timeRequired', '$totalVideos', '$totalQuiz', '$totalNotes', '$totalPractices', '$durationMonths', '$price');";
     if (mysqli_query($conn, $sql_insertCourse)) {
+        $nest = './classes/'.$courseName.'/';
+        mkdir($nest, 0777, true);
         echo '<script type="text/javascript">alert("Data Inserted Successfully!")</script>';
     } else {
         echo '<script type="text/javascript">alert("Failed!")</script>';

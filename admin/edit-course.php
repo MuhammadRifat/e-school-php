@@ -23,7 +23,7 @@ if ($row['category'] === 'Academic') {
     <h3 class="text-center border-bottom">Edit Course</h3>
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
         <div class="row">
-            <input type="hidden" name="id" class="form-control" value="<?php echo $row['id'] ?>" placeholder="Course Name" required>
+            <input type="hidden" name="id" class="form-control" value="<?php echo $id; ?>" placeholder="Course Name" required>
 
             <div class="col-sm-6 col-md-4 col-lg-3 mt-3">
                 <h6>Course Name</h6>
@@ -139,17 +139,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $price = validation($_POST['price']);
 
     $class = '';
-    $sql_updateCourse = "UPDATE `courses` set `course_name`='$courseName', `category`='$category', `description`='$courseDescription', `teacher_name`='$teacherName', `teacher_details`='$teacherDetails', `about_course`='$aboutCourse', `time_required`=$timeRequired, `total_videos`=$totalVideos, `total_quizz`=$totalQuiz, `total_notes`=$totalNotes, `total_practices`=$totalPractices, `duration_months`=$durationMonths, `price`=$price where id=$course_id;";
+    $sql_updateCourse = "UPDATE `courses` set `course_name`='$courseName', `category`='$category', `description`='$courseDescription', `teacher_name`='$teacherName', `teacher_details`='$teacherDetails', `about_course`='$aboutCourse', `time_required`=$timeRequired, `total_videos`=$totalVideos, `total_quizz`=$totalQuiz, `total_notes`=$totalNotes, `total_practices`=$totalPractices, `duration_months`=$durationMonths, `price`=$price where id=$course_id";
     if ($category === 'Academic') {
         $class = validation($_POST['class']);
-        $sql_updateCourse = "UPDATE `courses` set `course_name`='$courseName', `category`='$category', `class`=$class, `description`='$courseDescription', `teacher_name`='$teacherName', `teacher_details`='$teacherDetails', `about_course`='$aboutCourse', `time_required`=$timeRequired, `total_videos`=$totalVideos, `total_quizz`=$totalQuiz, `total_notes`=$totalNotes, `total_practices`=$totalPractices, `duration_months`=$durationMonths, `price`=$price where id=$course_id;";
+        $sql_updateCourse = "UPDATE `courses` set `course_name`='$courseName', `category`='$category', `class`=$class, `description`='$courseDescription', `teacher_name`='$teacherName', `teacher_details`='$teacherDetails', `about_course`='$aboutCourse', `time_required`=$timeRequired, `total_videos`=$totalVideos, `total_quizz`=$totalQuiz, `total_notes`=$totalNotes, `total_practices`=$totalPractices, `duration_months`=$durationMonths, `price`=$price where id=$course_id";
     }
 
     if (mysqli_query($conn, $sql_updateCourse)) {
         echo '<script type="text/javascript">alert("Data Updated Successfully!")</script>';
         echo "<script>location.href='edit-course.php?id=$course_id';</script>";
     } else {
-        echo '<script type="text/javascript">alert("Failed!")</script>';
+        echo '<script type="text/javascript">alert("Failed!: '.mysqli_error($conn).'")</script>';
         echo "<script>location.href='edit-course.php?id=$course_id';</script>";
     }
 }

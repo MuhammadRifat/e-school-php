@@ -27,6 +27,8 @@ if (!$_SESSION['user_email_address']) {
                 </a>
             </div>';
             }
+        } else {
+            echo '<h5 class="text-danger text-center mt-3">Course not found.</h5>';
         }
         ?>
     </div>
